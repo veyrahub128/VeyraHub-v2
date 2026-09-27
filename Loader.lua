@@ -32,7 +32,7 @@ local HubVisible = true
 local dragging = false
 local dragInput, dragStart, startPos
 
--- Création de l'écran
+-- Create Screen
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "VeyraHub"
 ScreenGui.ResetOnSpawn = false
@@ -50,19 +50,19 @@ MainFrame.BorderSizePixel = 0
 MainFrame.Active = true
 MainFrame.Parent = ScreenGui
 
--- Arrondir les coins
+-- Round corners
 local UICorner = Instance.new("UICorner")
 UICorner.CornerRadius = UDim.new(0, 12)
 UICorner.Parent = MainFrame
 
--- Ombre
+-- Shadow
 local Shadow = Instance.new("UIStroke")
 Shadow.Color = Color3.fromRGB(147, 0, 255)
 Shadow.Thickness = 2
 Shadow.Transparency = 0.3
 Shadow.Parent = MainFrame
 
--- Barre de titre
+-- Title Bar
 local TitleBar = Instance.new("Frame")
 TitleBar.Name = "TitleBar"
 TitleBar.Size = UDim2.new(1, 0, 0, 40)
@@ -75,7 +75,7 @@ local TitleCorner = Instance.new("UICorner")
 TitleCorner.CornerRadius = UDim.new(0, 12)
 TitleCorner.Parent = TitleBar
 
--- Titre avec police stylée (GothamBlack)
+-- Title with stylish font (GothamBlack)
 local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(1, 0, 1, 0)
 Title.BackgroundTransparency = 1
@@ -85,7 +85,7 @@ Title.TextSize = 20
 Title.Font = Enum.Font.GothamBlack
 Title.Parent = TitleBar
 
--- Bouton toggle (AGGRANDI)
+-- Toggle Button (ENLARGED)
 local ToggleButton = Instance.new("TextButton")
 ToggleButton.Name = "ToggleButton"
 ToggleButton.Size = UDim2.new(0, 140, 0, 50)
@@ -103,7 +103,7 @@ local ToggleCorner = Instance.new("UICorner")
 ToggleCorner.CornerRadius = UDim.new(0, 10)
 ToggleCorner.Parent = ToggleButton
 
--- Texte statut (EN ANGLAIS)
+-- Status Text (IN ENGLISH)
 local StatusText = Instance.new("TextLabel")
 StatusText.Size = UDim2.new(1, 0, 0, 30)
 StatusText.Position = UDim2.new(0, 0, 0, 120)
@@ -114,7 +114,7 @@ StatusText.TextSize = 14
 StatusText.Font = Enum.Font.Gotham
 StatusText.Parent = MainFrame
 
--- Fonction de drag
+-- Drag Function
 local function updateDrag(input)
     local delta = input.Position - dragStart
     MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
@@ -145,7 +145,7 @@ UserInputService.InputChanged:Connect(function(input)
     end
 end)
 
--- Fonction pour vérifier les admins
+-- Function to check for admins
 local function CheckAdmins()
     for _, player in ipairs(Players:GetPlayers()) do
         if Admins[player.Name] then
@@ -155,7 +155,7 @@ local function CheckAdmins()
     end
 end
 
--- Fonction pour activer/désactiver le hub
+-- Function to toggle the hub
 local function ToggleHub()
     HubEnabled = not HubEnabled
     
@@ -165,7 +165,7 @@ local function ToggleHub()
         StatusText.Text = "Status: Enabled"
         CheckAdmins()
         
-        -- Boucle de vérification
+        -- Verification loop
         RunService.Heartbeat:Connect(function()
             if HubEnabled then
                 CheckAdmins()
@@ -178,10 +178,10 @@ local function ToggleHub()
     end
 end
 
--- Bouton toggle
+-- Toggle button
 ToggleButton.MouseButton1Click:Connect(ToggleHub)
 
--- Raccourci H
+-- H shortcut
 UserInputService.InputBegan:Connect(function(input)
     if input.KeyCode == Enum.KeyCode.H then
         HubVisible = not HubVisible
@@ -189,7 +189,7 @@ UserInputService.InputBegan:Connect(function(input)
     end
 end)
 
--- Notification (EN BLANC)
+-- Notification (IN WHITE)
 local Notification = Instance.new("TextLabel")
 Notification.Size = UDim2.new(0, 200, 0, 40)
 Notification.Position = UDim2.new(0.5, -100, 0.1, 0)
@@ -197,7 +197,7 @@ Notification.BackgroundColor3 = Color3.fromRGB(20, 20, 35)
 Notification.BackgroundTransparency = 0.3
 Notification.BorderSizePixel = 0
 Notification.Text = "Veyra Hub Loaded!"
-Notification.TextColor3 = Color3.fromRGB(255, 255, 255) -- BLANC
+Notification.TextColor3 = Color3.fromRGB(255, 255, 255) -- WHITE
 Notification.TextSize = 14
 Notification.Font = Enum.Font.GothamBold
 Notification.Visible = true
@@ -207,7 +207,7 @@ local NotificationCorner = Instance.new("UICorner")
 NotificationCorner.CornerRadius = UDim.new(0, 8)
 NotificationCorner.Parent = Notification
 
--- Animation de notification
+-- Notification animation
 task.wait(3)
 TweenService:Create(Notification, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1, TextTransparency = 1}):Play()
 task.wait(1)
